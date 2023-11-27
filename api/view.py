@@ -27,7 +27,6 @@ class View:
         self._data.update(
             {"judul_episode": title, "next": next, "prev": prev, "stream": stream}
         )
-        print(self._data)
 
         return self._data
 
