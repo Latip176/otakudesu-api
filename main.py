@@ -36,7 +36,7 @@ def info():
     url = request.args.get("url")
     if url:
         Main = Reads(url=url)
-        return Output.results(Main.results, "debug!", 200)
+        return Output.results(Main.results, "success", 200)
     return Output.results(None, "url is required!", 400)
 
 
@@ -45,7 +45,7 @@ def view():
     url = request.args.get("url")
     if url:
         Main = View(url=url)
-        return Output.results(Main.results, "debug!", 200)
+        return Output.results(Main.results, "success", 200)
     return Output.results(None, "url is required!", 400)
 
 
