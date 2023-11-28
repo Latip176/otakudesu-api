@@ -26,7 +26,9 @@ class WebScrapper:
             data_private.append(
                 {
                     "judul_episode": title_episode,
-                    "url": href_episode,
+                    "data": re.findall(
+                        "https\:\/\/otakudesu\.cam\/episode\/(.*?)\/", str(href_episode)
+                    )[0],
                     "release": release_episode,
                 }
             )
