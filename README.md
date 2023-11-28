@@ -355,7 +355,7 @@ https://latipharkat-api.my.id/api/otakudesu/info/?data=berserk-gluttony-sub-indo
 with required data episode anime
 
 ```
-https://latipharkat-api.my.id/api/otakudesu/view/?url=woar-episode-9-sub-indo
+https://latipharkat-api.my.id/api/otakudesu/view/?data=woar-episode-9-sub-indo
 ```
 
 ### results
