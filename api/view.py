@@ -16,12 +16,19 @@ class View:
         title = venutama.find("h1", attrs={"class": "posttl"}).string
         prev = venutama.find("div", attrs={"class": "flir"}).findAll("a")
         prev, next = prev[0], prev[1]
-        prev = "None" if str(prev.string) == "See All Episodes" else prev["href"]
-        next = "None" if str(next.string) == "See All Episodes" else next["href"]
-        stream = "/hd/?id=".join(
-            str(
-                venutama.find("div", attrs={"id": "lightsVideo"}).find("iframe")["src"]
-            ).split("/?id=")
+        prev = (
+            "None"
+            if str(prev.string) == "See All Episodes"
+            else re.findall(
+                "https\:\/\/otakudesu\.cam\/episode\/(.*?)\/", prev["href"]
+            )[0]
+        )
+        next = (
+            "None"
+            if str(next.string) == "See All Episodes"
+            else re.findall(
+                "https\:\/\/otakudesu\.cam\/episode\/(.*?)\/", next["href"]
+            )[0]
         )
 
         self._data.update(
