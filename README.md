@@ -28,70 +28,6 @@ https://latipharkat-api.my.id/api/otakudesu/ongoing/?next=page-2
   "data": {
     "data_anime": [
       {
-        "cover": "https://otakudesu.cam/wp-content/uploads/2023/10/Hoshikuzu-Telepath.jpg",
-        "data": "hoshikuzu-tpath-sub-indo",
-        "episode": "Episode 8",
-        "judul": "Hoshikuzu Telepath",
-        "release": "28 Nov",
-        "release_on_every": "Senin"
-      },
-      {
-        "cover": "https://otakudesu.cam/wp-content/uploads/2023/10/Watashi-no-Oshi-wa-Akuyaku-Reijou..jpg",
-        "data": "watashi-reijou-sub-indo",
-        "episode": "Episode 9",
-        "judul": "Watashi no Oshi wa Akuyaku Reijou.",
-        "release": "28 Nov",
-        "release_on_every": "Selasa"
-      },
-      {
-        "cover": "https://otakudesu.cam/wp-content/uploads/2023/10/Dead-Mount-Death-Play-Part-2.jpg",
-        "data": "demount-play-p2-sub-indo",
-        "episode": "Episode 8",
-        "judul": "Dead Mount Death Play Part 2",
-        "release": "28 Nov",
-        "release_on_every": "Selasa"
-      },
-      {
-        "cover": "https://otakudesu.cam/wp-content/uploads/2023/10/The-iDOLM@STER-Million-Live.jpg",
-        "data": "idol-million-live-sub-indo",
-        "episode": "Episode 8",
-        "judul": "The iDOLM@STER Million Live!",
-        "release": "28 Nov",
-        "release_on_every": "Senin"
-      },
-      {
-        "cover": "https://otakudesu.cam/wp-content/uploads/2023/07/136736.jpg",
-        "data": "dark-gather-sub-indo",
-        "episode": "Episode 21",
-        "judul": "Dark Gathering",
-        "release": "27 Nov",
-        "release_on_every": "Senin"
-      },
-      {
-        "cover": "https://otakudesu.cam/wp-content/uploads/2023/10/Overtake.jpg",
-        "data": "ovrtake-subtitle-indonesia",
-        "episode": "Episode 9",
-        "judul": "Overtake!",
-        "release": "27 Nov",
-        "release_on_every": "Senin"
-      },
-      {
-        "cover": "https://otakudesu.cam/wp-content/uploads/2023/10/Boushoku-no-Berserk.jpg",
-        "data": "berserk-gluttony-sub-indo",
-        "episode": "Episode 9",
-        "judul": "Boushoku no Berserk",
-        "release": "27 Nov",
-        "release_on_every": "Senin"
-      },
-      {
-        "cover": "https://otakudesu.cam/wp-content/uploads/2023/10/MF-Ghost.jpg",
-        "data": "mf-ghst-sub-indo",
-        "episode": "Episode 9",
-        "judul": "MF Ghost",
-        "release": "27 Nov",
-        "release_on_every": "Senin"
-      },
-      {
         "cover": "https://otakudesu.cam/wp-content/uploads/2023/10/Dekoboko-Majo-no-Oyako-Jijou.jpg",
         "data": "dekobo-oyako-jijou-sub-indo",
         "episode": "Episode 10",
@@ -288,36 +224,6 @@ https://latipharkat-api.my.id/api/otakudesu/info/?data=berserk-gluttony-sub-indo
     "cover": "https://otakudesu.cam/wp-content/uploads/2023/10/Boushoku-no-Berserk.jpg",
     "data_episode": [
       {
-        "data": "bnb-episode-9-sub-indo",
-        "judul_episode": "Boushoku no Berserk Episode 9 Subtitle Indonesia",
-        "release": "27 November,2023"
-      },
-      {
-        "data": "bnb-episode-8-sub-indo",
-        "judul_episode": "Boushoku no Berserk Episode 8 Subtitle Indonesia",
-        "release": "20 November,2023"
-      },
-      {
-        "data": "bnb-episode-7-sub-indo",
-        "judul_episode": "Boushoku no Berserk Episode 7 Subtitle Indonesia",
-        "release": "13 November,2023"
-      },
-      {
-        "data": "bnb-episode-6-sub-indo",
-        "judul_episode": "Boushoku no Berserk Episode 6 Subtitle Indonesia",
-        "release": "6 November,2023"
-      },
-      {
-        "data": "bnb-episode-5-sub-indo",
-        "judul_episode": "Boushoku no Berserk Episode 5 Subtitle Indonesia",
-        "release": "30 Oktober,2023"
-      },
-      {
-        "data": "bnb-episode-4-sub-indo",
-        "judul_episode": "Boushoku no Berserk Episode 4 Subtitle Indonesia",
-        "release": "23 Oktober,2023"
-      },
-      {
         "data": "bnb-episode-3-sub-indo",
         "judul_episode": "Boushoku no Berserk Episode 3 Subtitle Indonesia",
         "release": "16 Oktober,2023"
@@ -355,7 +261,7 @@ https://latipharkat-api.my.id/api/otakudesu/info/?data=berserk-gluttony-sub-indo
 with required data episode anime
 
 ```
-https://latipharkat-api.my.id/api/otakudesu/view/?data=woar-episode-9-sub-indo
+https://latipharkat-api.my.id/api/otakudesu/view/?url=woar-episode-9-sub-indo
 ```
 
 ### results
@@ -366,7 +272,7 @@ https://latipharkat-api.my.id/api/otakudesu/view/?data=woar-episode-9-sub-indo
   "data": {
     "judul_episode": "Watashi no Oshi wa Akuyaku Reijou. Episode 9 Subtitle Indonesia",
     "next": "None",
-    "prev": "https://otakudesu.cam/episode/woar-episode-8-sub-indo/",
+    "prev": "woar-episode-8-sub-indo",
     "stream": "https://desustream.me/updesu/hd/?id=K1d3bTVkcExyN3VFb2prUHJMeTlxQT09"
   },
   "msg": "success"
