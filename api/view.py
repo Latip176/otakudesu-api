@@ -32,7 +32,7 @@ class View:
         )
 
         self._data.update(
-            {"judul_episode": title, "next": next, "prev": prev, "stream": stream}
+            {"judul_episode": title, "next": next, "prev": prev, "stream": venutama.find("div", attrs={"id": "lightsVideo"}).find("iframe")["src"]}
         )
 
         return self._data
