@@ -58,7 +58,7 @@ def view():
 # get all data by home otakudesu
 @app.route("/api/otakudesu/home/")
 def home():
-    data = Home("https://otakudesu.cam/")
+    data = Home("https://otakudesu.wiki/")
     return Output.results(data.results, "success", 200)
 
 
