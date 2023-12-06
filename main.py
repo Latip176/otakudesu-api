@@ -10,7 +10,8 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
-
+from werkzeug.middleware.proxy_fix import ProxyFix
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
 
 # set header response
 @app.after_request
@@ -58,7 +59,7 @@ def view():
 # get all data by home otakudesu
 @app.route("/api/otakudesu/home/")
 def home():
-    data = Home("https://otakudesu.wiki/")
+    data = Home("https://otakudesu.cam/")
     return Output.results(data.results, "success", 200)
 
 
