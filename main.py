@@ -60,6 +60,7 @@ def view():
 @app.route("/api/otakudesu/home/")
 def home():
     data = Home("https://otakudesu.cam/")
+    print(data.response())
     return Output.results(data.results, "success", 200)
 
 
