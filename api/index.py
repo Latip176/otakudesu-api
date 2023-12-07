@@ -1,5 +1,5 @@
 from api.module import *
-
+import cloudscraper
 
 class WebScrapper:
     def __init__(self, url: str = None):
@@ -69,6 +69,7 @@ class Home(WebScrapper):
 
     def response(self) -> str:
         with requests.Session() as session:
-            response = session.get(self._url)
+            scrap = cloudscraper.create_scraper()
+            response = scrap.get(self._url)
             soup = BeautifulSoup(response.text, "html.parser")
         return soup
