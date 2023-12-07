@@ -44,6 +44,7 @@ class View:
 
     def __response(self):
         with requests.Session() as session:
-            response = session.get(self._url)
+            scrap = cloudscraper.create_scraper()
+            response = scrap.get(self._url)
             soup = BeautifulSoup(response.text, "html.parser")
         return soup

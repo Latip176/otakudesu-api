@@ -1,5 +1,4 @@
 from api.module import *
-import cloudscraper
 
 class WebScrapper:
     def __init__(self, url: str = None):
