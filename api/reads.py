@@ -71,8 +71,7 @@ class Reads(WebScrapper):
         self.proxies = proxies
 
     def response(self) -> str:
-        with requests.Session() as session:
-            scrap = cloudscraper.create_scraper()
-            response = scrap.get(self._url)
-            soup = BeautifulSoup(response.text, "html.parser")
+        scrap = cloudscraper.create_scraper()
+        response = scrap.get(self._url)
+        soup = BeautifulSoup(response.text, "html.parser")
         return soup

@@ -7,6 +7,13 @@ class View:
         self._data = {}
         self.proxies = proxies
 
+    def getMP4(self, link: str) -> str:
+        with requests.Session() as session:
+            response = session.get(link).text
+        get_stream_mp4 = re.findall(r"sources:\s\[\{\'file\':\'(.*?)\'", str(response))
+        get_stream_mp4 = get_stream_mp4[0] if len(get_stream_mp4) >= 1 else "None"
+        return get_stream_mp4
+
     def __getData(self, soup):
         venkonten = soup.find("div", attrs={"class": "wowmaskot"}).find(
             "div", attrs={"id": "venkonten"}
@@ -15,7 +22,7 @@ class View:
 
         title = venutama.find("h1", attrs={"class": "posttl"}).string
         prev = venutama.find("div", attrs={"class": "flir"}).findAll("a")
-        prev, next = prev[0], prev[1]
+        prev, next = prev[0], prev[-1]
         prev = (
             "None"
             if str(prev.string) == "See All Episodes"
@@ -32,7 +39,16 @@ class View:
         )
 
         self._data.update(
-            {"judul_episode": title, "next": next, "prev": prev, "stream": venutama.find("div", attrs={"id": "lightsVideo"}).find("iframe")["src"]}
+            {
+                "judul_episode": title,
+                "next": next,
+                "prev": prev,
+                "stream": self.getMP4(
+                    venutama.find("div", attrs={"id": "lightsVideo"}).find("iframe")[
+                        "src"
+                    ]
+                ),
+            }
         )
 
         return self._data
@@ -43,8 +59,7 @@ class View:
         return self._View__getData(soup=soup)
 
     def __response(self):
-        with requests.Session() as session:
-            scrap = cloudscraper.create_scraper()
-            response = scrap.get(self._url)
-            soup = BeautifulSoup(response.text, "html.parser")
+        scrap = cloudscraper.create_scraper()
+        response = scrap.get(self._url)
+        soup = BeautifulSoup(response.text, "html.parser")
         return soup
