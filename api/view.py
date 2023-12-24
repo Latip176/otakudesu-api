@@ -7,6 +7,7 @@ class View:
         self._data = {}
         self.proxies = proxies
 
+    # get mp4 from strem (not working, reason auth)
     def getMP4(self, link: str) -> str:
         with requests.Session() as session:
             response = session.get(link).text
@@ -14,7 +15,8 @@ class View:
         get_stream_mp4 = get_stream_mp4[0] if len(get_stream_mp4) >= 1 else "None"
         return get_stream_mp4
 
-    def __getData(self, soup):
+    # get data from anime
+    def __getData(self, soup) -> dict:
         venkonten = soup.find("div", attrs={"class": "wowmaskot"}).find(
             "div", attrs={"id": "venkonten"}
         )
@@ -43,22 +45,20 @@ class View:
                 "judul_episode": title,
                 "next": next,
                 "prev": prev,
-                "stream": self.getMP4(
-                    venutama.find("div", attrs={"id": "lightsVideo"}).find("iframe")[
-                        "src"
-                    ]
-                ),
+                "stream": venutama.find("div", attrs={"id": "lightsVideo"}).find(
+                    "iframe"
+                )["src"],
             }
         )
 
         return self._data
 
     @property
-    def results(self):
+    def results(self) -> dict:
         soup = self._View__response()
         return self._View__getData(soup=soup)
 
-    def __response(self):
+    def __response(self) -> str:
         scrap = cloudscraper.create_scraper()
         response = scrap.get(self._url)
         soup = BeautifulSoup(response.text, "html.parser")
