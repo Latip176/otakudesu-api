@@ -12,7 +12,7 @@ class Genres(cloudscraper.Session):
         soup = BeautifulSoup(response.text, "html.parser")
         return soup
 
-    def _genres(self) -> list:
+    def get_genres(self) -> list:
         soup = self._Genres__response(self._url)
         genres = [
             {"data": re.findall("\/genres\/(.*?)\/", str(k))[0], "name": v}
@@ -24,7 +24,7 @@ class Genres(cloudscraper.Session):
 
         return genres
 
-    def getData(self, genre: str = None) -> list:
+    def get_data(self, genre: str = None) -> dict:
         soup = self._Genres__response("https://otakudesu.media/genres/" + genre)
         venser = soup.find("div", attrs={"class": "venser"})
 
@@ -60,4 +60,21 @@ class Genres(cloudscraper.Session):
                 }
             )
 
-        return self._Genres__data
+        wowmaskot = soup.find("div", attrs={"class": "wowmaskot"}).find(
+            "div", attrs={"class": "venser"}
+        )
+        pagenation = wowmaskot.find("div", attrs={"class": "pagination"})
+
+        next, prev = pagenation.find(
+            "a", attrs={"class": "next page-numbers"}
+        ), pagenation.find("a", attrs={"class": "prev page-numbers"})
+
+        return {
+            "data": self._Genres__data,
+            "next": re.findall("\/page\/(\d+)\/", next["href"])[0]
+            if next != None
+            else "None",
+            "prev": re.findall("\/page\/(\d+)\/", prev["href"])[0]
+            if prev != None
+            else "None",
+        }

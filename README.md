@@ -110,7 +110,26 @@ https://latipharkat-api.my.id/api/otakudesu/genres/<genre>/
 {
   "author": "Latip176",
   "data": [
-    // ... (list of anime entries with cover, genre, rating, studio, judul, total_episode, data)
+    // ... (list of anime entries with cover, genre, rating, studio, judul, total_episode, data, next, prev)
+  ],
+  "msg": "success"
+}
+
+```
+
+## seach genre by append page
+
+```
+https://latipharkat-api.my.id/api/otakudesu/genres/<genre>/<page>
+```
+
+### results example https://latipharkat-api.my.id/api/otakudesu/genres/action/2
+
+```JSON
+{
+  "author": "Latip176",
+  "data": [
+    // ... (list of anime entries with cover, genre, rating, studio, judul, total_episode, data, next, prev)
   ],
   "msg": "success"
 }

@@ -86,16 +86,23 @@ def searchAnime():
 
 # GENRES
 @app.route("/api/otakudesu/genres/")
-def genre():
+def get_all_genres():
     data = Genres("https://otakudesu.media/genre-list/")
-    return Output.results(data._genres(), "success", 200)
+    return Output.results(data.get_genres(), "success", 200)
 
 
 @app.route("/api/otakudesu/genres/<genre>/")
-def genres(genre=None):
-    data = Genres("https://otakudesu.media/genre-list/")
-    if genre:
-        return Output.results(data.getData(genre), "success", 200)
+@app.route("/api/otakudesu/genres/<genre>/<page>")
+def get_genres(genre, page=None):
+    try:
+        data = Genres("https://otakudesu.media/genre-list/")
+        if page:
+            return Output.results(
+                data.get_data(genre + "/page/" + page), "success", 200
+            )
+        return Output.results(data.get_data(genre), "success", 200)
+    except Exception as e:
+        return Output.results({"data": None}, f"error", 400)
 
 
 if __name__ == "__main__":
