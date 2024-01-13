@@ -1,71 +1,67 @@
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+from werkzeug.middleware.proxy_fix import ProxyFix
 from api.index import Home
 from api.reads import Reads
 from api.view import View
 from api.search import Search
+from api.genre import Genres
 from results import Output
-
-from flask import Flask, jsonify, request
-from flask_cors import CORS
-
 
 app = Flask(__name__)
 CORS(app)
-from werkzeug.middleware.proxy_fix import ProxyFix
-
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
 
 
-# set header response
+# Set header response
 @app.after_request
 def add_header(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Accept"] = "application/json"
-    response.headers["Content-Type"] = "application/json; charset=utf-8"
+    response.headers["Content-Type"] = "application/json"
     return response
 
 
-# index
+# INDEX API
 @app.route("/")
 def index():
     return Output.results(None, "Welcome to my API", 200)
 
 
-# index api
+# INDEX API
 @app.route("/api/otakudesu/")
 def otakudesu():
     return Output.results(
-        None, "Cek Documentation in github.com/Latip176/otakudesu-api", 200
+        None, "Check Documentation on github.com/Latip176/otakudesu-api", 200
     )
 
 
-# get info of anime
+# INFO
 @app.route("/api/otakudesu/info/")
 def info():
     url = request.args.get("data")
     if url:
         Main = Reads(url="https://otakudesu.cam/anime/" + url)
         return Output.results(Main.results, "success", 200)
-    return Output.results(None, "data is required!", 400)
+    return Output.results(None, "Data is required!", 400)
 
 
-# get strem by anime
+# STREAM
 @app.route("/api/otakudesu/view/")
 def view():
     url = request.args.get("data")
     if url:
         Main = View(url="https://otakudesu.cam/episode/" + url)
         return Output.results(Main.results, "success", 200)
-    return Output.results(None, "data is required!", 400)
+    return Output.results(None, "Data is required!", 400)
 
 
-# get all data by home otakudesu
+# HOME
 @app.route("/api/otakudesu/home/")
 def home():
     data = Home("https://otakudesu.cam/")
     return Output.results(data.results, "success", 200)
 
 
-# get data ongoing anime
+# ONGOING
 @app.route("/api/otakudesu/ongoing/")
 def ongoing():
     url = request.args.get("next")
@@ -77,7 +73,7 @@ def ongoing():
     return Output.results(data.results, "success", 200)
 
 
-# search anime by keyword
+# SEARCH
 @app.route("/api/otakudesu/search/")
 def searchAnime():
     keyword = request.args.get("keyword")
@@ -85,7 +81,21 @@ def searchAnime():
         keyword = keyword.replace(" ", "+")
         data = Search(url=f"https://otakudesu.cam/?s={keyword}&post_type=anime")
         return Output.results(data.results, "success", 200)
-    return Output.results(None, "keyword is required!", 400)
+    return Output.results(None, "Keyword is required!", 400)
+
+
+# GENRES
+@app.route("/api/otakudesu/genres/")
+def genre():
+    data = Genres("https://otakudesu.media/genre-list/")
+    return Output.results(data._genres(), "success", 200)
+
+
+@app.route("/api/otakudesu/genres/<genre>/")
+def genres(genre=None):
+    data = Genres("https://otakudesu.media/genre-list/")
+    if genre:
+        return Output.results(data.getData(genre), "success", 200)
 
 
 if __name__ == "__main__":
