@@ -12,17 +12,17 @@ class Genres(cloudscraper.Session):
         soup = BeautifulSoup(response.text, "html.parser")
         return soup
 
-    def _genres(self) -> dict:
+    def _genres(self) -> list:
         soup = self._Genres__response(self._url)
         genres = [
-            {"data": k, "name": v}
+            {"data": re.findall("\/genres\/(.*?)\/", str(k))[0], "name": v}
             for k, v in re.findall(
                 '<a\sdata\-wpel\-link\="internal"\shref\="(.*?)"\stitle\=".*?"\>(.*?)\<\/a\>',
                 str(soup.find("ul", attrs={"class": "genres"})),
             )
         ]
 
-        return {"genres": genres}
+        return genres
 
     def getData(self, genre: str = None) -> list:
         soup = self._Genres__response("https://otakudesu.media/genres/" + genre)
@@ -30,7 +30,12 @@ class Genres(cloudscraper.Session):
 
         for data in venser.findAll("div", attrs={"class": "col-anime"}):
             head = data.find("div", attrs={"class": "col-anime-title"}).find("a")
-            url, title = (head["href"], head.string)
+            url, title = (
+                re.findall(
+                    "https\:\/\/otakudesu\..*?\/anime\/(.*?)\/", str(head["href"])
+                )[0],
+                head.string,
+            )
             studio, total_epsd, rating, genre, cover = [
                 data.find("div", attrs={"class": "col-anime-studio"}).string,
                 data.find("div", attrs={"class": "col-anime-eps"}).string,
@@ -45,8 +50,8 @@ class Genres(cloudscraper.Session):
             ]
             self._Genres__data.append(
                 {
-                    "url": url,
-                    "title": title,
+                    "data": url,
+                    "judul": title,
                     "studio": studio,
                     "total_episode": total_epsd,
                     "rating": rating,

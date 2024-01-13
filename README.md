@@ -22,10 +22,6 @@ https://latipharkat-api.my.id/api/otakudesu/ongoing/?next=page-2
 
 ### results
 
-````JSON
-
-### Results
-
 ```JSON
 {
   "author": "Latip176",
@@ -46,7 +42,7 @@ https://latipharkat-api.my.id/api/otakudesu/ongoing/?next=page-2
   "msg": "success"
 }
 
-````
+```
 
 # search anime by keyword
 
@@ -114,7 +110,7 @@ https://latipharkat-api.my.id/api/otakudesu/genres/<genre>/
 {
   "author": "Latip176",
   "data": [
-    // ... (list of anime entries with cover, genre, rating, studio, title, total_episode, url)
+    // ... (list of anime entries with cover, genre, rating, studio, judul, total_episode, data)
   ],
   "msg": "success"
 }
