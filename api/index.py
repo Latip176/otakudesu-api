@@ -1,4 +1,4 @@
-from api.module import *
+from .module import *
 
 
 class WebScrapper:
@@ -38,7 +38,7 @@ class WebScrapper:
                     "judul": title,
                     "cover": cover["src"],
                     "data": re.findall(
-                        "https\:\/\/otakudesu\.cam\/anime\/(.*?)\/", str(thumb["href"])
+                        "https\:\/\/otakudesu\..*?\/anime\/(.*?)\/", str(thumb["href"])
                     )[0],
                     "episode": episode[0],
                     "release": release,

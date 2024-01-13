@@ -1,4 +1,4 @@
-from api.module import *
+from .module import *
 
 
 class View:
@@ -29,14 +29,14 @@ class View:
             "None"
             if str(prev.string) == "See All Episodes"
             else re.findall(
-                "https\:\/\/otakudesu\.cam\/episode\/(.*?)\/", prev["href"]
+                "https\:\/\/otakudesu\..*?\/episode\/(.*?)\/", prev["href"]
             )[0]
         )
         next = (
             "None"
             if str(next.string) == "See All Episodes"
             else re.findall(
-                "https\:\/\/otakudesu\.cam\/episode\/(.*?)\/", next["href"]
+                "https\:\/\/otakudesu\..*?\/episode\/(.*?)\/", next["href"]
             )[0]
         )
 

@@ -1,4 +1,4 @@
-from api.module import *
+from .module import *
 
 
 class WebScrapper:
@@ -20,7 +20,7 @@ class WebScrapper:
             cover = data.find("img")["src"]
             title = data.find("h2")
             url = re.findall(
-                "https\:\/\/otakudesu\.cam\/anime\/(.*?)\/",
+                "https\:\/\/otakudesu\..*?\/anime\/(.*?)\/",
                 str(title.find("a")["href"]),
             )[0]
             title = title.string.replace("\u2013", "-")
