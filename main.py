@@ -37,58 +37,79 @@ def otakudesu():
 # INFO
 @app.route("/api/otakudesu/info/")
 def info():
-    url = request.args.get("data")
-    if url:
-        Main = Reads(url="https://otakudesu.cam/anime/" + url)
-        return Output.results(Main.results, "success", 200)
-    return Output.results(None, "Data is required!", 400)
+    try:
+        url = request.args.get("data")
+        if url:
+            Main = Reads(url="https://otakudesu.cam/anime/" + url)
+            return Output.results(Main.results, "success", 200)
+        return Output.results(None, "Data is required!", 400)
+    except Exception as e:
+        return Output.results({"data": None}, f"error {e}", 400)
 
 
 # STREAM
 @app.route("/api/otakudesu/view/")
 def view():
-    url = request.args.get("data")
-    if url:
-        Main = View(url="https://otakudesu.cam/episode/" + url)
-        return Output.results(Main.results, "success", 200)
-    return Output.results(None, "Data is required!", 400)
+    try:
+        url = request.args.get("data")
+        if url:
+            Main = View(url="https://otakudesu.cam/episode/" + url)
+            return Output.results(Main.results, "success", 200)
+        return Output.results(None, "Data is required!", 400)
+    except Exception as e:
+        return Output.results({"data": None}, f"error {e}", 400)
 
 
 # HOME
 @app.route("/api/otakudesu/home/")
 def home():
-    data = Home("https://otakudesu.cam/")
-    return Output.results(data.results, "success", 200)
+    try:
+        data = Home("https://otakudesu.media/")
+        return Output.results(data.results, "success", 200)
+    except Exception as e:
+        return Output.results({"data": None}, f"error {e}", 400)
 
 
 # ONGOING
 @app.route("/api/otakudesu/ongoing/")
 def ongoing():
-    url = request.args.get("next")
-    data = (
-        Home("https://otakudesu.cam/ongoing-anime/" + url.replace("-", "/"), route=True)
-        if url
-        else Home("https://otakudesu.cam/ongoing-anime/", route=True)
-    )
-    return Output.results(data.results, "success", 200)
+    try:
+        url = request.args.get("next")
+        data = (
+            Home(
+                "https://otakudesu.media/ongoing-anime/" + url.replace("-", "/"),
+                route=True,
+            )
+            if url
+            else Home("https://otakudesu.media/ongoing-anime/", route=True)
+        )
+        return Output.results(data.results, "success", 200)
+    except Exception as e:
+        return Output.results({"data": None}, f"error {e}", 400)
 
 
 # SEARCH
 @app.route("/api/otakudesu/search/")
 def searchAnime():
-    keyword = request.args.get("keyword")
-    if keyword:
-        keyword = keyword.replace(" ", "+")
-        data = Search(url=f"https://otakudesu.cam/?s={keyword}&post_type=anime")
-        return Output.results(data.results, "success", 200)
-    return Output.results(None, "Keyword is required!", 400)
+    try:
+        keyword = request.args.get("keyword")
+        if keyword:
+            keyword = keyword.replace(" ", "+")
+            data = Search(url=f"https://otakudesu.media/?s={keyword}&post_type=anime")
+            return Output.results(data.results, "success", 200)
+        return Output.results(None, "Keyword is required!", 400)
+    except Exception as e:
+        return Output.results({"data": None}, f"error {e}", 400)
 
 
 # GENRES
 @app.route("/api/otakudesu/genres/")
 def get_all_genres():
-    data = Genres("https://otakudesu.media/genre-list/")
-    return Output.results(data.get_genres(), "success", 200)
+    try:
+        data = Genres("https://otakudesu.media/genre-list/")
+        return Output.results(data.get_genres(), "success", 200)
+    except Exception as e:
+        return Output.results({"data": None}, f"error {e}", 400)
 
 
 @app.route("/api/otakudesu/genres/<genre>/")
@@ -102,7 +123,7 @@ def get_genres(genre, page=None):
             )
         return Output.results(data.get_data(genre), "success", 200)
     except Exception as e:
-        return Output.results({"data": None}, f"error", 400)
+        return Output.results({"data": None}, f"error {e}", 400)
 
 
 if __name__ == "__main__":

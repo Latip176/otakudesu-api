@@ -40,7 +40,7 @@ class WebScrapper:
                     "data": re.findall(
                         "https\:\/\/otakudesu\..*?\/anime\/(.*?)\/", str(thumb["href"])
                     )[0],
-                    "episode": episode[0],
+                    "episode": "".join(episode),
                     "release": release,
                     "release_on_every": release_on[0],
                 }

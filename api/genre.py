@@ -1,14 +1,15 @@
 from .module import *
 
 
-class Genres(cloudscraper.Session):
+class Genres:
     def __init__(self, url) -> None:
         super().__init__()
         self._url = url
         self.__data = []
 
     def __response(self, url: str = None) -> BeautifulSoup:
-        response = self.get(url)
+        scrap = cloudscraper.create_scraper()
+        response = scrap.get(url)
         soup = BeautifulSoup(response.text, "html.parser")
         return soup
 
