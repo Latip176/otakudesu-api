@@ -88,6 +88,24 @@ def ongoing():
         return Output.results({"data": None}, f"error {e}", 400)
 
 
+# COMPLETED
+@app.route("/api/otakudesu/complete/")
+def complete():
+    try:
+        url = request.args.get("next")
+        data = (
+            Home(
+                "https://otakudesu.media/complete-anime/" + url.replace("-", "/"),
+                route=True,
+            )
+            if url
+            else Home("https://otakudesu.media/complete-anime/", route=True)
+        )
+        return Output.results(data.results, "success", 200)
+    except Exception as e:
+        return Output.results({"data": None}, f"error {e}", 400)
+
+
 # SEARCH
 @app.route("/api/otakudesu/search/")
 def searchAnime():
