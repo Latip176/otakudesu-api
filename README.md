@@ -44,6 +44,42 @@ https://latipharkat-api.my.id/api/otakudesu/ongoing/?next=page-2
 
 ```
 
+# get complete anime
+
+```
+https://latipharkat-api.my.id/api/otakudesu/complete
+```
+
+`You can get the next page by appending /?next=page-2 or other.`
+
+```
+https://latipharkat-api.my.id/api/otakudesu/complete/?next=page-2
+```
+
+### results
+
+```JSON
+{
+  "author": "Latip176",
+  "data": {
+    "data_anime": [
+      {
+        "cover": "https://otakudesu.cam/wp-content/uploads/2023/10/Dekoboko-Majo-no-Oyako-Jijou.jpg",
+        "data": "dekobo-oyako-jijou-sub-indo",
+        "episode": "Episode 10",
+        "judul": "Dekoboko Majo no Oyako Jijou",
+        "release": "27 Nov",
+        "release_on_every": "Senin"
+      },
+      // ... (other anime entries)
+    ],
+    "next": "page-2"
+  },
+  "msg": "success"
+}
+
+```
+
 # search anime by keyword
 
 With the required keyword
