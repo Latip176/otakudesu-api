@@ -26,7 +26,7 @@ class Genres:
         return genres
 
     def get_data(self, genre: str = None) -> dict:
-        soup = self._Genres__response("https://otakudesu.media/genres/" + genre)
+        soup = self._Genres__response("https://otakudesu.cloud/genres/" + genre)
         venser = soup.find("div", attrs={"class": "venser"})
 
         for data in venser.findAll("div", attrs={"class": "col-anime"}):

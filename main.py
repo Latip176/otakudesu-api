@@ -64,7 +64,7 @@ def view():
 @app.route("/api/otakudesu/home/")
 def home():
     try:
-        data = Home("https://otakudesu.media/")
+        data = Home("https://otakudesu.cloud/")
         return Output.results(data.results, "success", 200)
     except Exception as e:
         return Output.results({"data": None}, f"error {e}", 400)
@@ -77,11 +77,11 @@ def ongoing():
         url = request.args.get("next")
         data = (
             Home(
-                "https://otakudesu.media/ongoing-anime/" + url.replace("-", "/"),
+                "https://otakudesu.cloud/ongoing-anime/" + url.replace("-", "/"),
                 route=True,
             )
             if url
-            else Home("https://otakudesu.media/ongoing-anime/", route=True)
+            else Home("https://otakudesu.cloud/ongoing-anime/", route=True)
         )
         return Output.results(data.results, "success", 200)
     except Exception as e:
@@ -95,11 +95,11 @@ def complete():
         url = request.args.get("next")
         data = (
             Home(
-                "https://otakudesu.media/complete-anime/" + url.replace("-", "/"),
+                "https://otakudesu.cloud/complete-anime/" + url.replace("-", "/"),
                 route=True,
             )
             if url
-            else Home("https://otakudesu.media/complete-anime/", route=True)
+            else Home("https://otakudesu.cloud/complete-anime/", route=True)
         )
         return Output.results(data.results, "success", 200)
     except Exception as e:
@@ -113,7 +113,7 @@ def searchAnime():
         keyword = request.args.get("keyword")
         if keyword:
             keyword = keyword.replace(" ", "+")
-            data = Search(url=f"https://otakudesu.media/?s={keyword}&post_type=anime")
+            data = Search(url=f"https://otakudesu.cloud/?s={keyword}&post_type=anime")
             return Output.results(data.results, "success", 200)
         return Output.results(None, "Keyword is required!", 400)
     except Exception as e:
@@ -124,7 +124,7 @@ def searchAnime():
 @app.route("/api/otakudesu/genres/")
 def get_all_genres():
     try:
-        data = Genres("https://otakudesu.media/genre-list/")
+        data = Genres("https://otakudesu.cloud/genre-list/")
         return Output.results(data.get_genres(), "success", 200)
     except Exception as e:
         return Output.results({"data": None}, f"error {e}", 400)
@@ -134,7 +134,7 @@ def get_all_genres():
 @app.route("/api/otakudesu/genres/<genre>/<page>")
 def get_genres(genre, page=None):
     try:
-        data = Genres("https://otakudesu.media/genre-list/")
+        data = Genres("https://otakudesu.cloud/genre-list/")
         if page:
             return Output.results(
                 data.get_data(genre + "/page/" + page), "success", 200
