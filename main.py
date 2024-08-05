@@ -145,4 +145,4 @@ def get_genres(genre, page=None):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
